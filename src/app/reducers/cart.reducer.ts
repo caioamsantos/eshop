@@ -1,7 +1,6 @@
 ﻿import { CartModel } from '../models/cart.model';
 import { ActionModel } from '../models/action.model';
 import { ActionTypes } from '../actions/cart.action';
-import { stat } from 'fs';
 import { ProductModel } from '../models/product.model';
 
 export const cart = new CartModel();
@@ -16,7 +15,6 @@ export function cartReducer(
                 state.products.push(action.payload);
                 state.total = calculateTotal(state.products);
 
-                console.log(state);
                 return state;
             }
         case ActionTypes.Remove:
@@ -25,7 +23,6 @@ export function cartReducer(
                 state.products.splice(index, 1);
                 state.total = calculateTotal(state.products);
 
-                console.log(state);
                 return state;
             }
         case ActionTypes.Clear:
@@ -33,7 +30,6 @@ export function cartReducer(
                 state = new CartModel();
                 state.total = calculateTotal(state.products);
 
-                console.log(state);
                 return state;
             }
         default:
