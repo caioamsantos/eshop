@@ -1,0 +1,32 @@
+<ion-list *ngIf="(cart$ | async).products.length == 0">
+  <ion-item>
+    <ion-label class="text-center">
+        Seu carrinho está vazio
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-list *ngIf="(cart$ | async).products.length > 0">
+  <ion-item>
+    <ion-button (click)="reset()" expand="block" fill="clear" shape="round">
+      <ion-icon slot="start" name="trash"></ion-icon>
+      Limpar Carrinho
+    </ion-button>
+  </ion-item>
+
+  <ion-item *ngFor="let product of (cart$ | async).products">
+    <ion-avatar slot="start">
+      <img src="{{product.image}}" alt=""/>
+    </ion-avatar>
+    <ion-label>
+      <small>
+        {{product.title}}
+      </small>
+      <br>
+      {{product.price | currency: 'BRL'}}
+    </ion-label>
+    <ion-button (click)="presentRemoveConfirm(product)" fill="clear" color="danger">
+      <ion-icon slot="start" name="trash"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-list>
